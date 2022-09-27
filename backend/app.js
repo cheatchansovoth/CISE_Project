@@ -47,6 +47,9 @@ app.post('/login',async(req,res,next)=>
     }
 }
 );
+require('./BookDetails');
+const BookDetails=mongoose.model('BookDetails');
+
 app.get('/',(req,res,next)=>
 {
     res.send(`Port is running at ${port}`);
