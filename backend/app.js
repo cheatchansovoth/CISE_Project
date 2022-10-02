@@ -15,6 +15,7 @@ mongoose.connect(mongoUrl,{
 const port=5000;
 require('./userDetails');
 const User= mongoose.model('UserInformation');
+<<<<<<< Updated upstream
 app.post('/register',async(req,res)=>
 {
   const name=req.body.name;
@@ -33,20 +34,53 @@ app.post('/register',async(req,res)=>
   }
 });
 app.post('/login',async(req,res,next)=>
+=======
+app.post('/login',async(req,res)=>
+>>>>>>> Stashed changes
 {
     const email=req.body.email;
     const password=req.body.password;
     const user= await User.findOne({email:email});
-    if(!user || user.password!==password)
+
+    if(user)
     {
-        console.log('user not found')
+        if(user.password==password)
+        {
+            return res.status(200).json({message:'Work'});
+        }
+        else 
+        {
+            return res.status(401).json({message:'error'});
+        }
     }
     else 
     {
-        console.log('user found');
+        return res.status(401).json({message:'sth wrong'});
     }
 }
+<<<<<<< Updated upstream
 );
+=======
+)
+app.post('/register',async(req,res)=>
+{
+  const name=req.body.name;
+  const email=req.body.email;
+  const password=req.body.password;
+  const oldUser=await User.findOne({email});
+  if(oldUser) return res.status(401).json({error:"This email is already in use"})
+  const signup= new User({name:name,email:email,password:password});
+  try
+  {
+    await signup.save();
+   return res.json({user: signup});
+  }
+  catch(err)
+  {
+    return res.status.json({error: "This is error"});
+  }
+});
+>>>>>>> Stashed changes
 require('./BookDetails');
 const BookDetails=mongoose.model('BookDetails');
 
