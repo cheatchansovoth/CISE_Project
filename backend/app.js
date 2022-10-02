@@ -15,23 +15,6 @@ mongoose.connect(mongoUrl,{
 const port=5000;
 require('./userDetails');
 const User= mongoose.model('UserInformation');
-app.post('/register',async(req,res)=>
-{
-  const name=req.body.name;
-  const email=req.body.email;
-  const password=req.body.email;
-  const signup= new User({name:name,email:email,password:password});
-  try
-  {
-    await signup.save();
-    res.send({status:"ok"});
-  }
-  catch(err)
-  {
-    console.log(err);
-    res.send({status:"error"});
-  }
-});
 app.post('/login',async(req,res,next)=>
 {
     const email=req.body.email;
@@ -47,6 +30,24 @@ app.post('/login',async(req,res,next)=>
     }
 }
 );
+app.post('/register',async(req,res)=>
+{
+  const name=req.body.name;
+  const email=req.body.email;
+  const password=req.body.password;
+  const oldUser=await User.findOne({email});
+  if(oldUser) return res.status(401).json({error:"This email is already in use"})
+  const signup= new User({name:name,email:email,password:password});
+  try
+  {
+    await signup.save();
+   return res.json({user: signup});
+  }
+  catch(err)
+  {
+    return res.status.json({error: "This is error"});
+  }
+});
 require('./BookDetails');
 const BookDetails=mongoose.model('BookDetails');
 

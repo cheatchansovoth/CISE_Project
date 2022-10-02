@@ -1,8 +1,10 @@
 import Login from './Pages/Login'
+import Register from './Pages/Register'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button,Container,Nav,Navbar,NavDropdown,NavLink} from 'react-bootstrap';
 import {BrowserRouter as Router, Route, Routes,Link} from 'react-router-dom';
 import './App.css';
+
 
 function App() {
   return (
@@ -29,8 +31,8 @@ const Navbars=()=>{
         </Navbar>
         <Routes>
         <Route path='/' element={<Login/>}></Route>
-          {/* <Route path='/about' element={<About/>}></Route>
-          <Route path='/contact' element={<Contact/>}></Route>
+          <Route path='/Register' element={<Register/>}></Route>
+          {/* <Route path='/contact' element={<Contact/>}></Route>
           <Route path='/login' element={<Login/>}></Route>
           <Route path='/menu' element={<Menu/>}></Route>
           <Route path='/register' element={<Register/>}></Route> */}
