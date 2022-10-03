@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button,Container,Nav,Navbar,NavDropdown,NavLink} from 'react-bootstrap';
 import {BrowserRouter as Router, Route, Routes,Link} from 'react-router-dom';
 import './App.css';
+import UserTable from './Pages/UserTable';
 
 
 function App() {
@@ -32,9 +33,9 @@ const Navbars=()=>{
         <Routes>
         <Route path='/' element={<Login/>}></Route>
           <Route path='/Register' element={<Register/>}></Route>
-          {/* <Route path='/contact' element={<Contact/>}></Route>
+          <Route path='/usertable' element={<UserTable />}></Route>
           <Route path='/login' element={<Login/>}></Route>
-          <Route path='/menu' element={<Menu/>}></Route>
+          {/* <Route path='/menu' element={<Menu/>}></Route>
           <Route path='/register' element={<Register/>}></Route> */}
         </Routes>
   </Router>

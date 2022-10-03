@@ -14,12 +14,8 @@ mongoose.connect(mongoUrl,{
 }).catch((e)=>console.log(e));
 const port=5000;
 require('./userDetails');
-const User= mongoose.model('UserInformation');
-<<<<<<< Updated upstream
+const User= mongoose.model('Usertbl');
 app.post('/login',async(req,res,next)=>
-=======
-app.post('/login',async(req,res)=>
->>>>>>> Stashed changes
 {
     const email=req.body.email;
     const password=req.body.password;
@@ -33,11 +29,7 @@ app.post('/login',async(req,res)=>
         console.log('user found');
     }
 }
-<<<<<<< Updated upstream
 );
-=======
-)
->>>>>>> Stashed changes
 app.post('/register',async(req,res)=>
 {
   const name=req.body.name;
