@@ -1,0 +1,22 @@
+.modify-section
+{
+    position: absolute;
+    width: 100%;
+    margin-top: 5%;
+
+}
+.modify-user-form
+{
+    width: 100%;
+    margin-left: 37%;
+    position: absolute;
+}
+.button-modity
+{
+    position: absolute;
+    left:2%;
+}
+.button-modity button
+{
+    width: 120px;
+}
