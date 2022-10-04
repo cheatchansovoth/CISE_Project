@@ -41,9 +41,6 @@ const ResetPassword=()=>
                 </Col>
             </Row>
             </form>
-            <Link to={`newpassword/${getToken._id}`}>
-                        <MDBBtn variant="primary" className='m-1'>Edit</MDBBtn>
-            </Link>
             </Container>
     </div>
 }
