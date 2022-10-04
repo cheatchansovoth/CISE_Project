@@ -38,6 +38,7 @@ const ResetPassword=()=>
                 <MDBBtn type='submit' className='submit-btn mt-5'>Submit</MDBBtn>
                 </Col>
                 <Col className='mt-5'>
+                    {getToken.result? <a>Test</a>:null}
                 </Col>
             </Row>
             </form>
