@@ -6,6 +6,8 @@ import {BrowserRouter as Router, Route, Routes,Link} from 'react-router-dom';
 import './App.css';
 import UserTable from './Pages/UserTable';
 import FindUser from './Pages/FindUser';
+import ResetPassword from './Pages/ResetPassword';
+import NewPassword from './Pages/NewPassword';
 
 
 function App() {
@@ -37,7 +39,8 @@ const Navbars=()=>{
           <Route path='/usertable' element={<UserTable />}></Route>
           <Route path='/login' element={<Login/>}></Route>
           <Route path='/usertable/finduser/:id' element={<FindUser/>}></Route>
-          {/* <Route path='/register' element={<Register/>}></Route> */}
+          <Route path='/resetpassword' element={<ResetPassword/>}></Route>
+          <Route path='resetpassword/newpassword/:id' element={<NewPassword/>}></Route>
         </Routes>
   </Router>
   );

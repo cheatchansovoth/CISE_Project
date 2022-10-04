@@ -2,10 +2,12 @@ const express =require('express')
 const cors=require('cors');
 const mongoose= require('mongoose');
 
+const jwt=require('jsonwebtoken');
 const app=express();
 app.use(express.json());
 app.use(cors());
 
+const JWT_SECRET='umi@mooni'
 const mongoUrl="mongodb+srv://chansovoth:FMpO0En5ytbaKsi1@cluster0.n1ovkfy.mongodb.net/?retryWrites=true&w=majority";
 mongoose.connect(mongoUrl,{
     useNewUrlParser:true,
@@ -59,13 +61,49 @@ app.get('/finduser/:id',async (req,res)=>
   const id=req.params.id;
   User.findById(id, function (err, result) {
     if (err){
-      res.send(err);
+      console.log(' not find user');
     }
     else{
-      res.send(result)
+      console.log('find user');
     }
+})
+})
+app.post('/reset-password',async(req,res)=>
+{
+  const email=req.body.email;
+  const oldUser= await User.findOne({email:email});
+  if(!oldUser)
+  {
+    res.status(401).json({error:'Invalid Email'})
+  }
+  else 
+  {
+    const secret=JWT_SECRET+oldUser.password;
 
+    const payload={
+      email:oldUser.email,
+      id:oldUser._id,
+    }
+    const token=jwt.sign(payload,secret,{expiresIn:'15m'})
 
+    const link=`http://localhost:5000/reset-password/${oldUser._id}/${token}`;
+    console.log(link);
+    res.status(200).json({result:link});
+  }
+})
+app.get('/reset-password/:id/:token',async (req,res)=>
+{
+    const id=req.params.id;
+    const token=req.params.token;
+    User.findById(id, function (err, result) {
+    if (err){
+      console.log(' not find user');
+    }
+    else{
+      console.log('find user');
+      res.json({User:result})
+    }
+  
 })
 })
 app.put('/updateUser',async(req,res)=>
@@ -101,6 +139,7 @@ app.get('/userinformation', async (req,res)=>
     }
   })
 })
+
 app.delete('/deleteuser/:id',async(req,res)=>
 {
   const id=req.params.id;
