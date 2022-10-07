@@ -11,7 +11,6 @@ import Axios from 'axios'
 const ResetPassword=()=>
 
 {
-    const [getToken,setGetToken]=useState("");
     const Formik=useFormik({
         initialValues:{
             email:'',
@@ -21,8 +20,11 @@ const ResetPassword=()=>
                 email:values.email,
             }).then((res)=>
             {
+                window.localStorage.setItem('token',JSON.stringify(res.data));
                 console.log(res.data);
-                setGetToken(res.data);
+            }).catch((err)=>
+            {
+                console.log(err);
             })
         }
     })
@@ -41,9 +43,6 @@ const ResetPassword=()=>
                 </Col>
             </Row>
             </form>
-            <Link to={`newpassword/${getToken._id}`}>
-                        <MDBBtn variant="primary" className='m-1'>Edit</MDBBtn>
-            </Link>
             </Container>
     </div>
 }
