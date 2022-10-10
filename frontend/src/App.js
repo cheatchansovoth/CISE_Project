@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from "react";
 import Login from './Pages/Login'
 import Register from './Pages/Register'
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -8,13 +8,14 @@ import './App.css';
 import UserTable from './Pages/UserTable';
 
 import Home from "./Pages/Home";
-import SEPractice from "./pages/SE-Practice";
-import SubmitArticle from "./pages/Submit-Article"; 
+import SEPractice from "./Pages/SE-Practice";
+import SubmitArticle from "./Pages/Submit-Article";
 //import NotFoundPage from "./pages/404";
 
 
 function App() {
   return (
+
     <div className="App">
       <Navbars/>
     </div>
@@ -22,7 +23,7 @@ function App() {
 }
 const Navbars=()=>{
   return (
-    <Router>
+    <Router>//
         <Navbar bg="dark" expand="lg" variant="dark">
           <Container >
             <Navbar.Brand as={Link} to="/">Home</Navbar.Brand>
@@ -32,6 +33,8 @@ const Navbars=()=>{
                 <Nav.Link as={Link} to="/contact">Contact</Nav.Link>
                 <Nav.Link as={Link} to="/about">About</Nav.Link>
                 <Nav.Link as={Link} to="/login">Login</Nav.Link>
+                <NavLink as={Link} to="/SEPractice">Select the Practice</NavLink>
+                <NavLink as={Link}to = "/SubmitArticle">Submit an Article</NavLink>
               </Nav>
             </Navbar.Collapse>
           </Container>
@@ -41,25 +44,12 @@ const Navbars=()=>{
           <Route path='/Register' element={<Register/>}></Route>
           <Route path='/usertable' element={<UserTable />}></Route>
           <Route path='/login' element={<Login/>}></Route>
+          <Route exact path="/" component={Home}/>
+            <Route  path="/SEPractice" component={SEPractice}/>
+            <Route  path="/SubmitArticle" component={SubmitArticle}/>
           {/* <Route path='/menu' element={<Menu/>}></Route>
           <Route path='/register' element={<Register/>}></Route> */}
         </Routes>
-        <div>
-          <h1>Software Practice Emiriical Evidence Database (SPEED)</h1>
-            <ul className='=header'>
-            <li><NavLink exact to = "/">Home</NavLink></li>
-                <li><NavLink to = "/SEPractice">Select the Practice</NavLink></li>
-                <li><NavLink to = "/SubmitArticle">Submit an Article</NavLink></li>
-              <li><a href = "/">Home</a></li>
-              <li><a href = "/SEPractice">Select the Practice</a></li>
-              <li><a href = "/SubmitArticle">Submit an Article</a></li>
-            </ul>
-            <div className='content'>
-            <Route exact path="/" component={Home}/>
-            <Route  path="/SEPractice" component={SEPractice}/>
-            <Route  path="/SubmitArticle" component={SubmitArticle}/>  
-            </div>
-        </div>
   </Router>
   );
 }

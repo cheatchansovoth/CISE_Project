@@ -1,6 +1,7 @@
 import articles from "../dummydata/articles.js";
+import React, { Component } from "react";
 import Styles from "../components/tablestyle.js";
-import Table from "../components/evidencetable.js";
+import Table from "../components/Evidencetable.js";
 import tablecolumns from "../components/tablecolumns.js";
 const SEPractice = () => {
     return (
