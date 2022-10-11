@@ -61,20 +61,52 @@ app.get('/finduser/:id',async (req,res)=>
   const id=req.params.id;
   User.findById(id, function (err, result) {
     if (err){
-      console.log(' not find user');
+      res.json({message:'not find user'});
     }
     else{
       console.log('find user');
     }
 })
 })
+<<<<<<< Updated upstream
+=======
+
+const sendEmail=(link,userEmail,name)=>
+{
+  var transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'cheatchansovoth@gmail.com',
+      pass: 'wsuizluhrmmmtrcu'
+    }
+  });
+  
+  var mailOptions = {
+    from: 'cheatchansovoth@gmail.com',
+    to: `${userEmail}`,
+    subject: 'Request new password',
+    html: `
+      <h1>Hi ${name}</h1>
+      <b>Please no not share this link.</b><br/>
+      ${link}
+    `,
+  };
+  transporter.sendMail(mailOptions, function(error, info){
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('Email sent: ' + info.response);
+    }
+})
+}
+>>>>>>> Stashed changes
 app.post('/reset-password',async(req,res)=>
 {
   const email=req.body.email;
   const oldUser= await User.findOne({email:email});
   if(!oldUser)
   {
-    res.status(401).json({error:'Invalid Email'})
+    res.status(401).json({error:'Incorrect Email'})
   }
   else 
   {
@@ -88,7 +120,12 @@ app.post('/reset-password',async(req,res)=>
 
     const link=`http://localhost:5000/reset-password/${oldUser._id}/${token}`;
     console.log(link);
+<<<<<<< Updated upstream
     res.status(200).json({result:link});
+=======
+    res.status(200).json({result:link,userID:oldUser._id});
+    sendEmail(link,oldUser.email,oldUser.name);
+>>>>>>> Stashed changes
   }
 })
 app.get('/reset-password/:id/:token',async (req,res)=>
@@ -125,6 +162,34 @@ app.put('/updateUser',async(req,res)=>
     res.send(err)
   }
 })
+<<<<<<< Updated upstream
+=======
+app.put('/resetPasswordUser',async(req,res)=>
+{
+  const id=req.body.id;
+  const newPassword=req.body.newPassword;
+
+  try{
+    User.findById(id,(err,updateInfo)=>
+    {
+      if(User)
+      {  
+        updateInfo.password=newPassword;
+        updateInfo.save();
+        res.send(updateInfo);
+      }
+      else 
+      {
+        res.status(401).json({message:'can not find user'});
+      }
+    })
+  }catch(err)
+  {
+    res.send(err)
+  }
+})
+
+>>>>>>> Stashed changes
 app.get('/userinformation', async (req,res)=>
 {
   User.find({},(err,result)=>
