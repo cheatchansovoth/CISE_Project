@@ -3,6 +3,8 @@ const cors=require('cors');
 const mongoose= require('mongoose');
 
 const jwt=require('jsonwebtoken');
+const nodemailer = require("nodemailer");
+
 const app=express();
 app.use(express.json());
 app.use(cors());
@@ -15,6 +17,8 @@ mongoose.connect(mongoUrl,{
     console.log('DB is conntected');
 }).catch((e)=>console.log(e));
 const port=5000;
+
+
 require('./userDetails');
 const User= mongoose.model('Usertbl');
   app.post('/register',async(req,res)=>
@@ -43,7 +47,15 @@ const User= mongoose.model('Usertbl');
       {
           if(user.password==password)
           {
-              return res.status(200).json({message:'Work'});
+              const secret=JWT_SECRET;
+
+              const payload={
+                email:user.email,
+                id:user._id,
+              }
+              const token=jwt.sign(payload,secret,{expiresIn:'15m'})
+
+              return res.status(200).json({user:token,isAdmin:user.isAdmin});
           }
           else 
           {
@@ -65,41 +77,10 @@ app.get('/finduser/:id',async (req,res)=>
     }
     else{
       console.log('find user');
+      res.send({User:result});
     }
 })
 })
-<<<<<<< Updated upstream
-=======
-
-const sendEmail=(link,userEmail,name)=>
-{
-  var transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-      user: 'cheatchansovoth@gmail.com',
-      pass: 'wsuizluhrmmmtrcu'
-    }
-  });
-  
-  var mailOptions = {
-    from: 'cheatchansovoth@gmail.com',
-    to: `${userEmail}`,
-    subject: 'Request new password',
-    html: `
-      <h1>Hi ${name}</h1>
-      <b>Please no not share this link.</b><br/>
-      ${link}
-    `,
-  };
-  transporter.sendMail(mailOptions, function(error, info){
-    if (error) {
-      console.log(error);
-    } else {
-      console.log('Email sent: ' + info.response);
-    }
-})
-}
->>>>>>> Stashed changes
 app.post('/reset-password',async(req,res)=>
 {
   const email=req.body.email;
@@ -116,16 +97,12 @@ app.post('/reset-password',async(req,res)=>
       email:oldUser.email,
       id:oldUser._id,
     }
+
     const token=jwt.sign(payload,secret,{expiresIn:'15m'})
 
-    const link=`http://localhost:5000/reset-password/${oldUser._id}/${token}`;
+    const link=`http://localhost:3000/resetpassword/newpassword/${oldUser._id}`;
     console.log(link);
-<<<<<<< Updated upstream
     res.status(200).json({result:link});
-=======
-    res.status(200).json({result:link,userID:oldUser._id});
-    sendEmail(link,oldUser.email,oldUser.name);
->>>>>>> Stashed changes
   }
 })
 app.get('/reset-password/:id/:token',async (req,res)=>
@@ -162,34 +139,6 @@ app.put('/updateUser',async(req,res)=>
     res.send(err)
   }
 })
-<<<<<<< Updated upstream
-=======
-app.put('/resetPasswordUser',async(req,res)=>
-{
-  const id=req.body.id;
-  const newPassword=req.body.newPassword;
-
-  try{
-    User.findById(id,(err,updateInfo)=>
-    {
-      if(User)
-      {  
-        updateInfo.password=newPassword;
-        updateInfo.save();
-        res.send(updateInfo);
-      }
-      else 
-      {
-        res.status(401).json({message:'can not find user'});
-      }
-    })
-  }catch(err)
-  {
-    res.send(err)
-  }
-})
-
->>>>>>> Stashed changes
 app.get('/userinformation', async (req,res)=>
 {
   User.find({},(err,result)=>

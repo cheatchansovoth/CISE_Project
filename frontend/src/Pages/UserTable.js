@@ -7,13 +7,20 @@ import {Link} from 'react-router-dom';
 const UserTable=()=>
 {
     const [userList,setUserList]=useState([]);
-
     useEffect(()=>
     {
-        Axios.get("http://localhost:5000/userinformation").then((response)=>
-        {
-            setUserList(response.data);
-        })
+            const storeData=JSON.parse(localStorage.getItem('token'));
+            if(storeData.isAdmin=='true')
+            {
+                Axios.get("http://localhost:5000/userinformation").then((response)=>
+                {
+                    setUserList(response.data);
+                })
+            }
+            else 
+            {
+                window.location.href='/login'
+            }
     },[])
     
     const Delete=(id)=>

@@ -1,3 +1,4 @@
+import {useMemo,useState,createContext } from 'react'
 import Login from './Pages/Login'
 import Register from './Pages/Register'
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -9,7 +10,6 @@ import FindUser from './Pages/FindUser';
 import ResetPassword from './Pages/ResetPassword';
 import NewPassword from './Pages/NewPassword';
 
-
 function App() {
   return (
     <div className="App">
@@ -18,6 +18,7 @@ function App() {
   );
 }
 const Navbars=()=>{
+  const UserContext = createContext()
   return (
     <Router>
         <Navbar bg="dark" expand="lg" variant="dark">
@@ -34,13 +35,13 @@ const Navbars=()=>{
           </Container>
         </Navbar>
         <Routes>
-        <Route path='/' element={<Login/>}></Route>
+        <Route path='/' element={<Register/>}></Route>
           <Route path='/Register' element={<Register/>}></Route>
-          <Route path='/usertable' element={<UserTable />}></Route>
           <Route path='/login' element={<Login/>}></Route>
+          <Route path='/usertable' element={<UserTable />}></Route>
           <Route path='/usertable/finduser/:id' element={<FindUser/>}></Route>
           <Route path='/resetpassword' element={<ResetPassword/>}></Route>
-          <Route path='resetpassword/newpassword/:id' element={<NewPassword/>}></Route>
+          <Route path='/resetpassword/newpassword/:id' element={<NewPassword/>}></Route>
         </Routes>
   </Router>
   );

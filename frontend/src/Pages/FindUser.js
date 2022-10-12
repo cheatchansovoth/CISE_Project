@@ -17,13 +17,13 @@ const Finduser=()=>
     {
         Axios.get(`http://localhost:5000/finduser/${id}`).then((response)=>
         {
-            setGetdata(response.data);
-            // console.log(response.data);
+            setGetdata(response.data.User);
+            console.log(response.data.User);
         })
     },[])
     const updateData=()=>
     {
-         Axios.put(`http://localhost:5000/updateUser/`,{
+            Axios.put(`http://localhost:5000/updateUser/`,{
             id:id,
             newName:newName,
             newPassword:
