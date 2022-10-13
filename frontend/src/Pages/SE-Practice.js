@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import Styles from "../components/tablestyle.js";
 import Table from "../components/Evidencetable.js";
 import tablecolumns from "../components/tablecolumns.js";
-const SEPractice = () => {
+function SEPractice  () {
     return (
       <div>
         <h2>Select SE Practice to get evidence for the claimed benefits</h2>

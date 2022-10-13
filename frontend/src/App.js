@@ -35,6 +35,7 @@ const Navbars=()=>{
                 <Nav.Link as={Link} to="/login">Login</Nav.Link>
                 <NavLink as={Link} to="/SEPractice">Select the Practice</NavLink>
                 <NavLink as={Link}to = "/SubmitArticle">Submit an Article</NavLink>
+
               </Nav>
             </Navbar.Collapse>
           </Container>
@@ -44,9 +45,9 @@ const Navbars=()=>{
           <Route path='/Register' element={<Register/>}></Route>
           <Route path='/usertable' element={<UserTable />}></Route>
           <Route path='/login' element={<Login/>}></Route>
-          <Route exact path="/" component={Home}/>
-            <Route  path="/SEPractice" component={SEPractice}/>
-            <Route  path="/SubmitArticle" component={SubmitArticle}/>
+            <Route  path="/SEPractice" element={<SEPractice></SEPractice>}/>
+            <Route  path="/SubmitArticle" element={<SubmitArticle></SubmitArticle>}/>
+
           {/* <Route path='/menu' element={<Menu/>}></Route>
           <Route path='/register' element={<Register/>}></Route> */}
         </Routes>
