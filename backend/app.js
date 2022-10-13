@@ -1,6 +1,9 @@
+
 const express =require('express')
 const cors=require('cors');
 const mongoose= require('mongoose');
+const { response } = require('express');
+
 
 const app=express();
 app.use(express.json());
@@ -72,28 +75,20 @@ app.get('/BookDetails', async (req,res)=>
   })
 })
 
-app.get("/BookDetailsFind",(req,res) =>{
+app.get("/BookDetailsFind",async(req,res) =>{
     const q = req.query.q;
     console.log(q);
-    const keys=["title","authors"]
-
-    const search = (data)=>{
-        return data.filter((item)=>
-        keys.some((key)=> item[key].toLowerCase().includes(q)))
-    }
-
-    search(BookDetails.find({},(err,result)=>
-  {
-    if(err)
+    const keys=['title','authors']
+let data = await BookDetails.find(
     {
-      res.send(err);
-    }
-    else
-    {
-      res.send(result)
-    }
-  }));
+        "$or":[
+            {title:{$regex: q,  '$options' : 'i'}},
+            {authors:{$regex: q,'$options' : 'i'}}
 
+        ]
+    }
+)
+res.send(data);
 });
 
 
