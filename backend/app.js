@@ -83,12 +83,25 @@ let data = await BookDetails.find(
     {
         "$or":[
             {title:{$regex: q,  '$options' : 'i'}},
-            {authors:{$regex: q,'$options' : 'i'}}
-
+            {authors:{$regex: q,'$options' : 'i'}},
+            {source:{$regex: q,'$options' : 'i'}},
         ]
     }
 )
 res.send(data);
+});
+app.get("/BookDetailsEvidence",async(req,res) =>{
+    BookDetails.find({},{evidence: 1 },(err,result)=>
+    {
+      if(err)
+      {
+        res.send(err);
+      }
+      else
+      {
+        res.send(result)
+      }
+    })
 });
 
 
