@@ -6,10 +6,9 @@ import { Button,Container,Nav,Navbar,NavDropdown,NavLink} from 'react-bootstrap'
 import {BrowserRouter as Router, Route, Routes,Link,Redirect} from 'react-router-dom';
 import './App.css';
 import UserTable from './Pages/UserTable';
-
+import Search from './Pages/Search'
 import Home from "./Pages/Home";
 import SEPractice from "./Pages/SE-Practice";
-import SubmitArticle from "./Pages/Submit-Article";
 //import NotFoundPage from "./pages/404";
 
 
@@ -34,7 +33,7 @@ const Navbars=()=>{
                 <Nav.Link as={Link} to="/about">About</Nav.Link>
                 <Nav.Link as={Link} to="/login">Login</Nav.Link>
                 <NavLink as={Link} to="/SEPractice">Select the Practice</NavLink>
-                <NavLink as={Link}to = "/SubmitArticle">Submit an Article</NavLink>
+                <NavLink as={Link}to = "/Search">Search</NavLink>
 
               </Nav>
             </Navbar.Collapse>
@@ -46,7 +45,7 @@ const Navbars=()=>{
           <Route path='/usertable' element={<UserTable />}></Route>
           <Route path='/login' element={<Login/>}></Route>
             <Route  path="/SEPractice" element={<SEPractice></SEPractice>}/>
-            <Route  path="/SubmitArticle" element={<SubmitArticle></SubmitArticle>}/>
+            <Route  path="/Search" element={<Search></Search>}/>
 
           {/* <Route path='/menu' element={<Menu/>}></Route>
           <Route path='/register' element={<Register/>}></Route> */}
