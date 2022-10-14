@@ -10,7 +10,7 @@ app.use(express.json());
 app.use(cors());
 
 const JWT_SECRET='umi@mooni'
-const mongoUrl="mongodb+srv://chansovoth:FMpO0En5ytbaKsi1@cluster0.n1ovkfy.mongodb.net/?retryWrites=true&w=majority";
+const mongoUrl="mongodb+srv://ciseteam:M4fkbschjMs3bKQ@cluster0.02ybbwu.mongodb.net/?retryWrites=true&w=majority";
 mongoose.connect(mongoUrl,{
     useNewUrlParser:true,
 }).then(()=>{

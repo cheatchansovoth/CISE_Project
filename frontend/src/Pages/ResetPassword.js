@@ -36,8 +36,8 @@ const ResetPassword=()=>
                 <MDBInput placeholder='Email' className='w-50 submit-field mt-5' type='email' name='email' value={Formik.values.email} onChange={Formik.handleChange}></MDBInput>
                 </Col>
                 <Col lg={12}>
-                {error?<p className='error-class'>{error}</p>:null}
-                {success?<p className='success-class'>{success}</p>:null}
+                {/* {error?<p className='error-class'>{error}</p>:null}
+                {success?<p className='success-class'>{success}</p>:null} */}
                 </Col>
                 <Col lg={12}>
                 <MDBBtn type='submit' className='submit-btn mt-5'>Submit</MDBBtn>

@@ -1,6 +1,7 @@
 import React,{useEffect,useState} from 'react'
 import Axios from 'axios';
 import { Container,Row,Col } from 'react-bootstrap';
+import {useParams} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { MDBInput,MDBBtn} from 'mdb-react-ui-kit';
 const NewPassword=()=>
