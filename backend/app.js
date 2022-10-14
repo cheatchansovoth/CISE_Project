@@ -1,6 +1,9 @@
+
 const express =require('express')
 const cors=require('cors');
 const mongoose= require('mongoose');
+const { response } = require('express');
+
 
 const jwt=require('jsonwebtoken');
 const nodemailer = require("nodemailer");
@@ -9,8 +12,12 @@ const app=express();
 app.use(express.json());
 app.use(cors());
 
+<<<<<<< HEAD
+const mongoUrl="mongodb+srv://SpeedAdmin:LI7H7HEztbFoyis5@speed.qngpaya.mongodb.net/?retryWrites=true&w=majority";
+=======
 const JWT_SECRET='umi@mooni'
 const mongoUrl="mongodb+srv://ciseteam:M4fkbschjMs3bKQ@cluster0.02ybbwu.mongodb.net/?retryWrites=true&w=majority";
+>>>>>>> 8b65d53c0426304c731e3e4a629d6835febee189
 mongoose.connect(mongoUrl,{
     useNewUrlParser:true,
 }).then(()=>{
@@ -21,6 +28,10 @@ const port=5000;
 
 require('./userDetails');
 const User= mongoose.model('Usertbl');
+<<<<<<< HEAD
+
+app.post('/register',async(req,res)=>
+=======
   app.post('/register',async(req,res)=>
   {
     const name=req.body.name;
@@ -82,6 +93,7 @@ app.get('/finduser/:id',async (req,res)=>
 })
 })
 app.post('/reset-password',async(req,res)=>
+>>>>>>> 8b65d53c0426304c731e3e4a629d6835febee189
 {
   const email=req.body.email;
   const oldUser= await User.findOne({email:email});
@@ -151,6 +163,11 @@ app.get('/userinformation', async (req,res)=>
     {
       res.send(result)
     }
+<<<<<<< HEAD
+}
+);
+require('./Models/BookDetails');
+=======
   })
 })
 
@@ -162,12 +179,53 @@ app.delete('/deleteuser/:id',async(req,res)=>
   res.send('deleted');
 })
 require('./BookDetails');
+>>>>>>> 8b65d53c0426304c731e3e4a629d6835febee189
 const BookDetails=mongoose.model('BookDetails');
-
-app.get('/',(req,res,next)=>
+app.get('/BookDetails', async (req,res)=>
 {
-    res.send(`Port is running at ${port}`);
+    BookDetails.find({},(err,result)=>
+  {
+    if(err)
+    {
+      res.send(err);
+    }
+    else
+    {
+      res.send(result)
+    }
+  })
 })
+
+app.get("/BookDetailsFind",async(req,res) =>{
+    const q = req.query.q;
+    console.log(q);
+    const keys=['title','authors']
+let data = await BookDetails.find(
+    {
+        "$or":[
+            {title:{$regex: q,  '$options' : 'i'}},
+            {authors:{$regex: q,'$options' : 'i'}},
+            {source:{$regex: q,'$options' : 'i'}},
+        ]
+    }
+)
+res.send(data);
+});
+app.get("/BookDetailsEvidence",async(req,res) =>{
+    BookDetails.find({},{evidence: 1 },(err,result)=>
+    {
+      if(err)
+      {
+        res.send(err);
+      }
+      else
+      {
+        res.send(result)
+      }
+    })
+});
+
+
 app.listen(port,(req,res)=>
 {
     console.log(`App is running at port ${port}`);
