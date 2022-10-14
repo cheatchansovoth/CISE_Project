@@ -1,6 +1,6 @@
 const mongoose=require('mongoose');
 
-const BookDetailsSchema= new mongoose.Schema(
+const userDetailsSchema= new mongoose.Schema(
     {
         title: String,
         authors: String,
@@ -15,4 +15,4 @@ const BookDetailsSchema= new mongoose.Schema(
     }
 );
 
-mongoose.model('BookDetails',BookDetailsSchema);
+mongoose.model('BookDetails',userDetailsSchema);
