@@ -1,4 +1,3 @@
-import articles from "../dummydata/articles.js";
 import benefitDropdown from"../components/benefitDropdown.js"
 import EvidenceDropbox from"../components/levelOfEvidenceDropdown.js"
 import React, { Component, useState, useEffect } from "react";
@@ -20,14 +19,6 @@ function SEPractice() {
     };
     if (query.length === 0 || query.length > 2) fetchData();
   }, [query]);
-
-  useEffect(() => {
-    const getedvidence = async() =>{
-
-
-    }
-    getedvidence()
-  })
 
   return (
     <div>

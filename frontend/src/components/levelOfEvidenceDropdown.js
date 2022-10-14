@@ -19,13 +19,11 @@ const optionItems = SEPractice.map((SEPractice) => (
   { value: 'vanilla', label: 'Vanilla' }*/
 
 const levelOfEvidenceDropdown = ({Evidencedrop}) => {
-  const optionItems = Evidencedrop.BookDetailsEvidence.map((Evidencedrop) => (
-    <option key={Evidencedrop.evidence}>{Evidencedrop.evidence}</option>))
   return (
     <Select
     isMulti
     name="colors"
-    options={optionItems}
+    options={Evidencedrop}
     className="EvidenceDropdown"
     classNamePrefix="Evidence"
   />

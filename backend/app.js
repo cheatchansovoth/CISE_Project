@@ -16,7 +16,7 @@ mongoose.connect(mongoUrl,{
     console.log('DB is conntected');
 }).catch((e)=>console.log(e));
 const port=5000;
-require('./userDetails');
+require('./Models/userDetails');
 const User= mongoose.model('Usertbl');
 
 app.post('/register',async(req,res)=>
