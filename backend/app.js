@@ -9,14 +9,14 @@ const app=express();
 app.use(express.json());
 app.use(cors());
 
-const mongoUrl="mongodb+srv://SpeedAdmin:LI7H7HEztbFoyis5@speed.qngpaya.mongodb.net/?retryWrites=true&w=majority";
+const mongoUrl="mongodb+srv://ciseteam:M4fkbschjMs3bKQ@cluster0.02ybbwu.mongodb.net/?retryWrites=true&w=majority";
 mongoose.connect(mongoUrl,{
     useNewUrlParser:true,
 }).then(()=>{
     console.log('DB is conntected');
 }).catch((e)=>console.log(e));
 const port=5000;
-require('./Models/userDetails');
+require('./userDetails');
 const User= mongoose.model('Usertbl');
 
 app.post('/register',async(req,res)=>
