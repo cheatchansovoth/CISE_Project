@@ -32,10 +32,21 @@ const Login=()=>
                 Axios.post('http://localhost:5000/login',{
                     email:values.email,
                     password:values.password
-                }).then(res=>alert('User is found')
-                  ).catch(err=>{alert('Given invalid data');
+                }).then((response)=>{
+                  // console.log(response.data)
+                  if(response.data.isAdmin==='false')
+                  {
+                    window.localStorage.setItem('token',JSON.stringify(response.data));
+                  }
+                  else 
+                  {
+                  window.localStorage.setItem('token',JSON.stringify(response.data));
+                  window.location.href='/usertable';
+                  }
+                }).catch((err)=>
+                {
+                  console.log(err);
                 })
-                console.log(values)
             }
         }
     )
