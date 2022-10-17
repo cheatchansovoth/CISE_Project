@@ -10,7 +10,7 @@ app.use(express.json());
 app.use(cors());
 
 const JWT_SECRET='umi@mooni'
-const mongoUrl="mongodb+srv://chansovoth:FMpO0En5ytbaKsi1@cluster0.n1ovkfy.mongodb.net/?retryWrites=true&w=majority";
+const mongoUrl="mongodb+srv://ciseteam:M4fkbschjMs3bKQ@cluster0.02ybbwu.mongodb.net/?retryWrites=true&w=majority";
 mongoose.connect(mongoUrl,{
     useNewUrlParser:true,
 }).then(()=>{
@@ -208,7 +208,34 @@ app.delete('/deleteuser/:id',async(req,res)=>
 })
 require('./BookDetails');
 const BookDetails=mongoose.model('BookDetails');
-
+app.get("/BookDetailsFind",async(req,res) =>{
+  const q = req.query.q;
+  console.log(q);
+  const keys=['title','authors']
+let data = await BookDetails.find(
+  {
+      "$or":[
+          {title:{$regex: q,  '$options' : 'i'}},
+          {authors:{$regex: q,'$options' : 'i'}},
+          {source:{$regex: q,'$options' : 'i'}},
+      ]
+  }
+)
+res.send(data);
+});
+app.get("/BookDetailsEvidence",async(req,res) =>{
+  BookDetails.find({},{evidence: 1 },(err,result)=>
+  {
+    if(err)
+    {
+      res.send(err);
+    }
+    else
+    {
+      res.send(result)
+    }
+  })
+});
 app.get('/',(req,res,next)=>
 {
     res.send(`Port is running at ${port}`);

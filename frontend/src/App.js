@@ -9,6 +9,7 @@ import UserTable from './Pages/UserTable';
 import FindUser from './Pages/FindUser';
 import ResetPassword from './Pages/ResetPassword';
 import NewPassword from './Pages/NewPassword';
+import SEPractice from "./Pages/SE-Practice";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ const Navbars=()=>{
                 <Nav.Link as={Link} to="/contact">Contact</Nav.Link>
                 <Nav.Link as={Link} to="/about">About</Nav.Link>
                 <Nav.Link as={Link} to="/login">Login</Nav.Link>
+                <NavLink as={Link} to="/SEPractice">Select the Practice</NavLink>
               </Nav>
             </Navbar.Collapse>
           </Container>
@@ -38,6 +40,7 @@ const Navbars=()=>{
         <Route path='/' element={<Register/>}></Route>
           <Route path='/Register' element={<Register/>}></Route>
           <Route path='/login' element={<Login/>}></Route>
+          <Route  path="/SEPractice" element={<SEPractice></SEPractice>}/>
           <Route path='/usertable' element={<UserTable />}></Route>
           <Route path='/usertable/finduser/:id' element={<FindUser/>}></Route>
           <Route path='/resetpassword' element={<ResetPassword/>}></Route>
