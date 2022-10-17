@@ -163,7 +163,34 @@ app.delete('/deleteuser/:id',async(req,res)=>
 })
 require('./BookDetails');
 const BookDetails=mongoose.model('BookDetails');
-
+app.get("/BookDetailsFind",async(req,res) =>{
+  const q = req.query.q;
+  console.log(q);
+  const keys=['title','authors']
+let data = await BookDetails.find(
+  {
+      "$or":[
+          {title:{$regex: q,  '$options' : 'i'}},
+          {authors:{$regex: q,'$options' : 'i'}},
+          {source:{$regex: q,'$options' : 'i'}},
+      ]
+  }
+)
+res.send(data);
+});
+app.get("/BookDetailsEvidence",async(req,res) =>{
+  BookDetails.find({},{evidence: 1 },(err,result)=>
+  {
+    if(err)
+    {
+      res.send(err);
+    }
+    else
+    {
+      res.send(result)
+    }
+  })
+});
 app.get('/',(req,res,next)=>
 {
     res.send(`Port is running at ${port}`);
