@@ -10,7 +10,7 @@ import FindUser from './Pages/FindUser';
 import ResetPassword from './Pages/ResetPassword';
 import NewPassword from './Pages/NewPassword';
 import SEPractice from "./Pages/SE-Practice";
-
+import Card from './Pages/Card';
 function App() {
   return (
     <div className="App">
@@ -37,7 +37,7 @@ const Navbars=()=>{
           </Container>
         </Navbar>
         <Routes>
-        <Route path='/' element={<Register/>}></Route>
+        <Route path='/' element={<Card/>}></Route>
           <Route path='/Register' element={<Register/>}></Route>
           <Route path='/login' element={<Login/>}></Route>
           <Route  path="/SEPractice" element={<SEPractice></SEPractice>}/>

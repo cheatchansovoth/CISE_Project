@@ -178,6 +178,20 @@ let data = await BookDetails.find(
 )
 res.send(data);
 });
+app.get('/cardinformation', async (req,res)=>
+{
+  BookDetails.find({},(err,result)=>
+  {
+    if(err)
+    {
+      res.send(err);
+    }
+    else
+    {
+      res.send(result)
+    }
+  })
+})
 app.get("/BookDetailsEvidence",async(req,res) =>{
   BookDetails.find({},{evidence: 1 },(err,result)=>
   {
