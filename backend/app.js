@@ -205,6 +205,27 @@ app.get("/BookDetailsEvidence",async(req,res) =>{
     }
   })
 });
+app.post('/post-article',async(req,res)=>
+  {
+    const title=req.body.title
+    const authors=req.body.authors
+    const source=req.body.source
+    const pubyear=req.body.pubyear
+    const doi=req.body.doi
+    const claim=req.body.claim
+    const evidence=req.body.evidence  
+    const newBookDetails= new BookDetails({title:title,authors:authors,source:source,pubyear:pubyear,doi:doi,claim:claim,evidence:evidence});
+    try
+    {
+      await newBookDetails.save();
+      res.send({status:"ok"});
+    }
+    catch(err)
+    {
+      console.log(err);
+      res.send({status:"error"});
+    }
+  });
 app.get('/',(req,res,next)=>
 {
     res.send(`Port is running at ${port}`);

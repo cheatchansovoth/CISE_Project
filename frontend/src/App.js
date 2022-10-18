@@ -11,6 +11,7 @@ import ResetPassword from './Pages/ResetPassword';
 import NewPassword from './Pages/NewPassword';
 import SEPractice from "./Pages/SE-Practice";
 import Card from './Pages/Card';
+import Upload from './Pages/Upload'
 function App() {
   return (
     <div className="App">
@@ -42,6 +43,7 @@ const Navbars=()=>{
           <Route path='/usertable' element={<UserTable />}></Route>
           <Route path='/usertable/finduser/:id' element={<FindUser/>}></Route>
           <Route path='/resetpassword' element={<ResetPassword/>}></Route>
+          <Route path='/upload' element={<Upload/>}></Route>
           <Route path='/resetpassword/newpassword/:id' element={<NewPassword/>}></Route>
         </Routes>
   </Router>

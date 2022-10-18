@@ -16,8 +16,8 @@ const CartContent=()=>
         })
     },[])
     return (
-        <div>
-            <h1>SPEED DB</h1>
+        <div className='mt-5'>
+            <h1>Article</h1>
             <div className='.Card'>
             <Container>
             <Row>
