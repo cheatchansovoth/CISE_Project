@@ -28,8 +28,6 @@ const Navbars=()=>{
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="text-center">
-                <Nav.Link as={Link} to="/contact">Contact</Nav.Link>
-                <Nav.Link as={Link} to="/about">About</Nav.Link>
                 <Nav.Link as={Link} to="/login">Login</Nav.Link>
                 <NavLink as={Link} to="/SEPractice">Select the Practice</NavLink>
               </Nav>
