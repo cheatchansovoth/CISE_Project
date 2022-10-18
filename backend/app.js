@@ -178,8 +178,13 @@ let data = await BookDetails.find(
 )
 res.send(data);
 });
-app.get("/BookDetailsEvidence",async(req,res) =>{
-  BookDetails.find({},{evidence: 1 },(err,result)=>
+
+require ("./PendingBooks")
+const PendingBooks=mongoose.model('PendingBooks');
+
+app.get('/PendingBooks', async (req,res)=>
+{
+  PendingBooks.find({},(err,result)=>
   {
     if(err)
     {
@@ -190,7 +195,43 @@ app.get("/BookDetailsEvidence",async(req,res) =>{
       res.send(result)
     }
   })
-});
+})
+app.delete('/PendingBooks/:id',async(req,res)=>
+{
+  const id=req.params.id;
+  
+  await PendingBooks.deleteOne({_id:id})
+  res.send('Book deleted');
+})
+
+/*app.post("/PendingBooks/accept/:id",async(req,res)=>{
+  const id=req.params.id;
+  PendingBooks.findOne({_id:id},function(err,result){
+    const swap = new (BookDetails)
+    swap._id = mongoose.Types.ObjectId()
+    swap.isNew = true;
+
+    result.remove()
+    swap.save
+
+  })
+})*/
+
+app.post("/PendingBooks/accept/:id",async(req,res)=>{
+  const id=req.params.id;
+  PendingBooks.findOne({_id:id},function(err,result){
+    BookDetails.title=title;
+    BookDetails.authors=authors
+    BookDetails.source=source
+    BookDetails.pubyear=pubyear
+    BookDetails.doi=doi
+    BookDetails.claim=claim
+    BookDetails.evidence=evidence
+  })
+})
+
+
+
 app.get('/',(req,res,next)=>
 {
     res.send(`Port is running at ${port}`);

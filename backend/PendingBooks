@@ -1,6 +1,6 @@
 const mongoose=require('mongoose');
 
-const BookDetailsSchema= new mongoose.Schema(
+const PendingBooksSchema= new mongoose.Schema(
     {
         title: String,
         authors: String,
@@ -11,9 +11,8 @@ const BookDetailsSchema= new mongoose.Schema(
         evidence: String,
     },
     {
-        collection:'BookDetails'
+        collection:'PendingBooks'
     }
 );
 
-
-mongoose.model('BookDetails',BookDetailsSchema);
+mongoose.model('PendingBooks',PendingBooksSchema);

@@ -6,8 +6,8 @@ import Axios from 'axios';
 import {Link} from 'react-router-dom';
 const UserTable=()=>
 {
-    const [userList,setUserList]=useState([]);
-    useEffect(()=>
+   const [userList,setUserList]=useState([]);
+    /*useEffect(()=>
     {
             const storeData=JSON.parse(localStorage.getItem('token'));
             if(storeData.isAdmin=='true')
@@ -21,11 +21,17 @@ const UserTable=()=>
             {
                 window.location.href='/login'
             }
-    },[])
-    
+    },[])*/
+    useEffect(() => {
+        const fetchData = async () => {
+          const res = await Axios.get(`http://localhost:5000/userinformation`);
+          setUserList(res.data);
+        };
+        fetchData();
+      }, []);
     const Delete=(id)=>
     {
-        Axios.delete(`http://localhost:5000/deleteuser/${id}`);
+        Axios.delete(`http://localhost:5000//deny/${id}`);
     }
     const Getdata=(id)=>
     {

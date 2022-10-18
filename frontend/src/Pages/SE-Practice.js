@@ -1,5 +1,3 @@
-import benefitDropdown from"../components/benefitDropdown.js"
-import EvidenceDropbox from"../components/levelOfEvidenceDropdown.js"
 import React, { Component, useState, useEffect } from "react";
 import Styles from "../components/tablestyle.js";
 import Table from "../components/Evidencetable.js";
@@ -14,18 +12,12 @@ function SEPractice() {
     const fetchData = async () => {
       const res = await axios.get(`http://localhost:5000/BookDetailsFind?q=${query}`);
       setArticleList(res.data);
-      const dropdown = await axios.get(`http://localhost:5000/BookDetailsEvidence`);
-      setEdvidence(dropdown.data);
     };
     if (query.length === 0 || query.length > 2) fetchData();
   }, [query]);
 
   return (
     <div>
-      <h2>Select SE Practice to get evidence for the claimed benefits</h2>
-      <EvidenceDropbox
-      Evidencedrop
-      />
       <input
           type="text"
           placeholder="Search..."

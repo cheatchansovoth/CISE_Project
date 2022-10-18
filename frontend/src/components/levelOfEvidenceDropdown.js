@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from "react";
+/*import React, { Component, useState, useEffect } from "react";
 import Select from 'react-select'
 import SEPractices from "../dummydata/SEPractices"
 import axios, * as others from "axios";
@@ -18,7 +18,7 @@ const optionItems = SEPractice.map((SEPractice) => (
   { value: 'strawberry', label: 'Strawberry' },
   { value: 'vanilla', label: 'Vanilla' }*/
 
-const levelOfEvidenceDropdown = ({Evidencedrop}) => {
+/*const levelOfEvidenceDropdown = ({Evidencedrop}) => {
   return (
     <Select
     isMulti
@@ -38,4 +38,4 @@ const levelOfEvidenceDropdown = ({Evidencedrop}) => {
          </div>
     )
   }*/
-  export default levelOfEvidenceDropdown;
+  //export default levelOfEvidenceDropdown;
