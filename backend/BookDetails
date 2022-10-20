@@ -9,6 +9,7 @@ const userDetailsSchema= new mongoose.Schema(
         doi: String,
         claim: String,
         evidence: String,
+        pending: {type:String,default:'true'}
     },
     {
         collection:'BookDetails'

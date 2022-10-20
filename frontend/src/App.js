@@ -30,16 +30,14 @@ const Navbars=()=>{
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="text-center">
                 <Nav.Link as={Link} to="/login">Login</Nav.Link>
-                <NavLink as={Link} to="/SEPractice">Select the Practice</NavLink>
               </Nav>
             </Navbar.Collapse>
           </Container>
         </Navbar>
         <Routes>
-        <Route path='/' element={<Card/>}></Route>
+        <Route path='/' element={<SEPractice/>}></Route>
           <Route path='/Register' element={<Register/>}></Route>
           <Route path='/login' element={<Login/>}></Route>
-          <Route  path="/SEPractice" element={<SEPractice></SEPractice>}/>
           <Route path='/usertable' element={<UserTable />}></Route>
           <Route path='/usertable/finduser/:id' element={<FindUser/>}></Route>
           <Route path='/resetpassword' element={<ResetPassword/>}></Route>

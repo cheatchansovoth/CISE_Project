@@ -168,15 +168,16 @@ app.get("/BookDetailsFind",async(req,res) =>{
   console.log(q);
   const keys=['title','authors']
 let data = await BookDetails.find(
-  {
-      "$or":[
-          {title:{$regex: q,  '$options' : 'i'}},
-          {authors:{$regex: q,'$options' : 'i'}},
-          {source:{$regex: q,'$options' : 'i'}},
-      ]
-  }
-)
+  {'pending': {$ne : "true"},
+    "$or":[
+    {title:{$regex: q,  '$options' : 'i'}},
+    {authors:{$regex: q,'$options' : 'i'}},
+    {source:{$regex: q,'$options' : 'i'}},
+]}
+  
+  )
 res.send(data);
+console.log(data)
 });
 app.get('/cardinformation', async (req,res)=>
 {
