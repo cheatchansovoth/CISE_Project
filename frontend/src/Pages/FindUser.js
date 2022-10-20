@@ -5,7 +5,7 @@ import { MDBInput} from 'mdb-react-ui-kit';
 import { useParams } from 'react-router-dom';
 import Axios from 'axios';
 import {useFormik} from 'formik';
-import './FindUser.css'
+import './stylesheet/FindUser.css'
 const Finduser=()=>
 {
     const {id}=useParams();
@@ -15,7 +15,7 @@ const Finduser=()=>
 
     useEffect(()=>
     {
-        Axios.get(`http://localhost:5000/finduser/${id}`).then((response)=>
+        Axios.get(`http://localhost:5000/admin/finduser/${id}`).then((response)=>
         {
             setGetdata(response.data.User);
             console.log(response.data.User);
@@ -23,7 +23,7 @@ const Finduser=()=>
     },[])
     const updateData=()=>
     {
-            Axios.put(`http://localhost:5000/updateUser/`,{
+            Axios.put(`http://localhost:5000/admin/updateUser/`,{
             id:id,
             newName:newName,
             newPassword:

@@ -12,7 +12,7 @@ const UserTable=()=>
             const storeData=JSON.parse(localStorage.getItem('token'));
             if(storeData.isAdmin=='true')
             {
-                Axios.get("http://localhost:5000/userinformation").then((response)=>
+                Axios.get("http://localhost:5000/admin/userinformation").then((response)=>
                 {
                     setUserList(response.data);
                 })
@@ -25,11 +25,11 @@ const UserTable=()=>
     
     const Delete=(id)=>
     {
-        Axios.delete(`http://localhost:5000/deleteuser/${id}`);
+        Axios.delete(`http://localhost:5000/admin/deleteuser/${id}`);
     }
     const Getdata=(id)=>
     {
-        Axios.get(`http://localhost:5000/finduser/${id}`);
+        Axios.get(`http://localhost:5000/admin/finduser/${id}`);
     }
 
     return <div>

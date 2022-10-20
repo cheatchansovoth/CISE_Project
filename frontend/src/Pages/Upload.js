@@ -3,7 +3,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {useFormik} from 'formik';
 import { basicSchema } from "../schema/index";
 
-import "./Register.css"
 import {
     MDBBtn,
     MDBContainer,

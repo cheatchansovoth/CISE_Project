@@ -4,7 +4,6 @@ const mongoose= require('mongoose');
 
 const jwt=require('jsonwebtoken');
 const nodemailer = require("nodemailer");
-const { response } = require('express');
 
 const app=express();
 app.use(express.json());
@@ -20,7 +19,7 @@ mongoose.connect(mongoUrl,{
 const port=5000;
 
 
-require('./userDetails');
+require('./model/userDetails');
 const User= mongoose.model('Usertbl');
   app.post('/register',async(req,res)=>
   {
@@ -221,7 +220,7 @@ app.put('/updateStatus',async(req,res)=>
     res.send(err)
   }
 })
-require('./BookDetails');
+require('./model/BookDetails');
 const BookDetails=mongoose.model('BookDetails');
 app.get("/BookDetailsFind",async(req,res) =>{
   const q = req.query.q;
@@ -284,7 +283,7 @@ app.post('/post-article',async(req,res)=>
       res.send({status:"error"});
     }
   });
-require('./RemoveArticle');
+require('./model/RemoveArticle');
 const RemoveArticle= mongoose.model('RemoveArticle');
 
 app.post('/removearticle',async(req,res)=>
