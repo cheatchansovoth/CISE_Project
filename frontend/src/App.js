@@ -10,8 +10,9 @@ import FindUser from './Pages/FindUser';
 import ResetPassword from './Pages/ResetPassword';
 import NewPassword from './Pages/NewPassword';
 import SEPractice from "./Pages/SE-Practice";
-import Card from './Pages/Card';
+import Moderator from './Pages/Moderator';
 import Upload from './Pages/Upload'
+import ApproveArticle from './Pages/ApproveArticle';
 function App() {
   return (
     <div className="App">
@@ -43,6 +44,8 @@ const Navbars=()=>{
           <Route path='/resetpassword' element={<ResetPassword/>}></Route>
           <Route path='/upload' element={<Upload/>}></Route>
           <Route path='/resetpassword/newpassword/:id' element={<NewPassword/>}></Route>
+          <Route path='/moderator' element={<Moderator/>}></Route>
+          <Route path='/moderator/update/:id' element={<ApproveArticle/>}></Route>
         </Routes>
   </Router>
   );

@@ -161,6 +161,43 @@ app.delete('/deleteuser/:id',async(req,res)=>
   await User.findByIdAndRemove(id).exec();
   res.send('deleted');
 })
+app.get('/bookdetails/:id',async (req,res)=>
+{
+  const id=req.params.id;
+  BookDetails.findById(id, function (err, result) {
+    if (err){
+      res.json({message:'not find book'});
+    }
+    else{
+      console.log('find book');
+      res.send({BookDetails:result});
+    }
+})
+})
+app.delete('/deleteBook/:id',async(req,res)=>
+{
+  const id=req.params.id;
+  
+  await BookDetails.findByIdAndRemove(id).exec();
+  res.send('deleted');
+})
+app.put('/updateStatus',async(req,res)=>
+{
+  const id=req.body.id;
+
+  try{
+    BookDetails.findById(id,(err,updateInfo)=>
+    {
+      updateInfo.pending='false';
+      updateInfo.save();
+      res.send(updateInfo);
+      console.log(updateInfo.status)
+    })
+  }catch(err)
+  {
+    res.send(err)
+  }
+})
 require('./BookDetails');
 const BookDetails=mongoose.model('BookDetails');
 app.get("/BookDetailsFind",async(req,res) =>{
@@ -177,11 +214,10 @@ let data = await BookDetails.find(
   
   )
 res.send(data);
-console.log(data)
 });
-app.get('/cardinformation', async (req,res)=>
+app.get('/mod/pendinglist', async (req,res)=>
 {
-  BookDetails.find({},(err,result)=>
+  BookDetails.find({'pending': {$ne : "false"}},(err,result)=>
   {
     if(err)
     {
