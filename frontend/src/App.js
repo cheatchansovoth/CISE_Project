@@ -1,4 +1,3 @@
-import {useMemo,useState,createContext } from 'react'
 import Login from './Pages/Login'
 import Register from './Pages/Register'
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -13,6 +12,13 @@ import SEPractice from "./Pages/SE-Practice";
 import Moderator from './Pages/Moderator';
 import Upload from './Pages/Upload'
 import ApproveArticle from './Pages/ApproveArticle';
+
+const storeData=JSON.parse(localStorage.getItem('token'));
+const Logout=()=>
+{
+  window.localStorage.removeItem('token');
+  window.location.reload();
+}
 function App() {
   return (
     <div className="App">
@@ -21,7 +27,6 @@ function App() {
   );
 }
 const Navbars=()=>{
-  const UserContext = createContext()
   return (
     <Router>
         <Navbar bg="dark" expand="lg" variant="dark">
@@ -30,7 +35,7 @@ const Navbars=()=>{
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="text-center">
-                <Nav.Link as={Link} to="/login">Login</Nav.Link>
+                <Nav.Link as={Link} to="/login">{storeData? <a onClick={Logout}>Logout</a>: <a>Login</a>}</Nav.Link>
               </Nav>
             </Navbar.Collapse>
           </Container>

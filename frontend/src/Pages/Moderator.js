@@ -6,7 +6,12 @@ import Button from 'react-bootstrap/Button';
 const Moderator=()=>
 {
     const [pendingList,setPendingList]=useState([]);
+    const storeData=JSON.parse(localStorage.getItem('token'));
 
+    if(!storeData)
+    {
+      window.location.href='/login'
+    }
     useEffect(()=>
     {
                 Axios.get("http://localhost:5000/mod/pendinglist").then((response)=>

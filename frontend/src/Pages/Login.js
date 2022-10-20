@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Axios from 'axios';
 import {useFormik} from 'formik';
@@ -20,6 +20,7 @@ import './Login.css';
 const Login=()=>
 {
 
+  const [error,setError]=useState("");
     const Formik=useFormik(
         {
             initialValues:
@@ -33,7 +34,6 @@ const Login=()=>
                     email:values.email,
                     password:values.password
                 }).then((response)=>{
-                  // console.log(response.data)
                   if(response.data.isAdmin==='false')
                   {
                     window.localStorage.setItem('token',JSON.stringify(response.data));
@@ -45,7 +45,8 @@ const Login=()=>
                   }
                 }).catch((err)=>
                 {
-                  console.log(err);
+                  setError("Invalid username and password")
+                  console.log(err.message);
                 })
             }
         }
@@ -62,13 +63,13 @@ const Login=()=>
             <MDBCardBody>
               <h1>Login</h1>
               <MDBInput wrapperClass='mb-4' placeholder='Email address' id='form1' type='email' name='email' className={`${Formik.touched.email && Formik.errors.email}`} value={Formik.values.email} onChange={Formik.handleChange}/>
-              {Formik.errors.email &&Formik.touched.email ? <p>{Formik.errors.email}</p>:null}
+              {Formik.errors.email &&Formik.touched.email ? <p className=' error-class'>{Formik.errors.email}</p>:null}
               <MDBInput wrapperClass='mb-4'placeholder='Password' id='form2' type='password' name='password' value={Formik.values.password} onChange={Formik.handleChange}/>
               <div className="d-flex justify-content-between mx-4 mb-4">
                 <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Remember me' />
-                <a href="!#">Forgot password?</a>
+                <a href="/resetpassword">Forgot password?</a>
               </div>
-
+              {error?<p className='error-class'>{error}</p>:null}
               <MDBBtn className="mb-4 w-50"  color='dark' type='submit'>Sign in</MDBBtn>
 
             </MDBCardBody>

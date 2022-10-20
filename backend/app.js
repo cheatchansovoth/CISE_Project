@@ -55,7 +55,7 @@ const User= mongoose.model('Usertbl');
               }
               const token=jwt.sign(payload,secret,{expiresIn:'15m'})
 
-              return res.status(200).json({user:token,isAdmin:user.isAdmin});
+              return res.status(200).json({user:token,isAdmin:user.isAdmin,isLogging:'true'});
           }
           else 
           {
@@ -68,6 +68,30 @@ const User= mongoose.model('Usertbl');
       }
   }
   );
+  const sendEmail=(link,userEmail)=>
+{
+  var transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'cheatchansovoth@gmail.com',
+      pass: 'wsuizluhrmmmtrcu'
+    }
+  });
+  
+  var mailOptions = {
+    from: 'cheatchansovoth@gmail.com',
+    to: `${userEmail}`,
+    subject: 'Sending Email using Node.js',
+    text: `${link}`
+  };
+  transporter.sendMail(mailOptions, function(error, info){
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('Email sent: ' + info.response);
+    }
+})
+}
 app.get('/finduser/:id',async (req,res)=>
 {
   const id=req.params.id;
@@ -99,8 +123,10 @@ app.post('/reset-password',async(req,res)=>
 
     const token=jwt.sign(payload,secret,{expiresIn:'15m'})
 
-    const link=`http://localhost:3000/resetpassword/newpassword/${oldUser._id}`;
+    const link=`http://128.199.126.239:5000/resetpassword/newpassword/${oldUser._id}`;
+    console.log(link);
     res.status(200).json({result:link});
+    sendEmail(link,oldUser.email);
   }
 })
 app.get('/reset-password/:id/:token',async (req,res)=>

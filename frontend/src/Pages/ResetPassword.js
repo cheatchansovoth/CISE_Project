@@ -22,7 +22,6 @@ const ResetPassword=()=>
             }).then((res)=>
             {
                 window.localStorage.setItem('token',JSON.stringify(res.data));
-                console.log(res.data);
                 setGetToken(res.data);
             })
         }
@@ -40,16 +39,10 @@ const ResetPassword=()=>
                 {success?<p className='success-class'>{success}</p>:null} */}
                 </Col>
                 <Col lg={12}>
-                <MDBBtn type='submit' className='submit-btn mt-5'>Submit</MDBBtn>
-                </Col>
-                <Col className='mt-5'>
-                    {getToken.result? <a>Test</a>:null}
+                <MDBBtn type='submit' className='submit-btn mt-5' >Submit</MDBBtn>
                 </Col>
             </Row>
             </form>
-            <Link to={`newpassword/${getToken._id}`}>
-                        <MDBBtn variant="primary" className='m-1'>Edit</MDBBtn>
-            </Link>
             </Container>
     </div>
 }
