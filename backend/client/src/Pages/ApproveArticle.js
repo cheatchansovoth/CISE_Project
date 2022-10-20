@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams,Link } from 'react-router-dom'
 import Axios from 'axios'
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
@@ -19,6 +19,9 @@ const ApproveArticle=()=>
     {
             Axios.put(`http://localhost:5000/mod/updateStatus/`,{
             id:id,
+        }).then((res)=>
+        {
+            window.alert('Article has been approved')
         })
     }
     const Delete=(id)=>
@@ -32,7 +35,10 @@ const ApproveArticle=()=>
              claim:userData.claim,
              evidence:userData.evidence, 
         })
-        Axios.delete(`http://localhost:5000/mod/deleteBook/${id}`);
+        Axios.delete(`http://localhost:5000/mod/deleteBook/${id}`).then((res)=>
+        {
+            window.alert('Article has been deleted')
+        });
     }
     return (<div>
                             <Card className='mt-3'>
@@ -41,6 +47,9 @@ const ApproveArticle=()=>
                             <p><i>{userData.pubyear}</i></p>
                             <Button variant="primary" className='m-1' onClick={()=>updateData(userData._id)}>Approve</Button>
                             <Button variant="primary" className='m-1' onClick={()=>Delete(userData._id)}>Delete</Button>
+                            <Link to='/moderator'>
+                            <Button variant="primary" className='m-1'>Back</Button>
+                            </Link>
                             </Card.Body>
                           </Card>
      </div>)

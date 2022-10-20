@@ -10,10 +10,14 @@ import {
   }
   from 'mdb-react-ui-kit';
 import Axios from 'axios';
-
 const Upload=()=>
 {
+        const storeData=JSON.parse(localStorage.getItem('token'));
 
+        if(!storeData)
+        {
+        window.location.href='/login'
+        }
     const Formik=useFormik(
         {
             initialValues:
@@ -39,6 +43,7 @@ const Upload=()=>
                 }).then(res=>
                     {
                         console.log(res);
+                        window.alert('Article has been submitted. It takes sometime to get approve.')
                     }).catch(err=>{
                         console.log(err);
                 })

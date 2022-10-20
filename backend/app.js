@@ -1,16 +1,16 @@
 const express =require('express')
 const cors=require('cors');
 const mongoose= require('mongoose');
-
+require('dotenv').config()
 const jwt=require('jsonwebtoken');
 const nodemailer = require("nodemailer");
-
+const path=require('path')
 const app=express();
 app.use(express.json());
 app.use(cors());
 
-const JWT_SECRET='umi@mooni'
-const mongoUrl="mongodb+srv://ciseteam:M4fkbschjMs3bKQ@cluster0.02ybbwu.mongodb.net/?retryWrites=true&w=majority";
+const JWT_SECRET=process.env.JWT_SECRET
+const mongoUrl=process.env.MongooseURL;
 mongoose.connect(mongoUrl,{
     useNewUrlParser:true,
 }).then(()=>{
@@ -72,8 +72,8 @@ const User= mongoose.model('Usertbl');
   var transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: 'cheatchansovoth@gmail.com',
-      pass: 'wsuizluhrmmmtrcu'
+      user: process.env.Username,
+      pass: process.env.Password
     }
   });
   
@@ -307,11 +307,17 @@ app.post('/mod/removearticle',async(req,res)=>
   }
 })
 
-app.get('/',(req,res,next)=>
+if(process.env.NODE_ENV==='production')
 {
-    res.send(`Port is running at ${port}`);
-})
-app.listen(port,(req,res)=>
+    app.use(express.static(path.join(__dirname,'/client/build')));
+    
+    app.get('*',(req,res)=>
+    {
+        res.sendFile(path.join(__dirname,'client','build','index.html'));
+    })
+}
+
+app.listen(process.env.PORT || 8080,(req,res)=>
 {
-    console.log(`App is running at port ${port}`);
+    console.log(`App is running at port ${process.env.PORT}`);
 })

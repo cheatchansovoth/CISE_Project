@@ -2,7 +2,7 @@ import {React,useState,useEffect} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 import { MDBInput} from 'mdb-react-ui-kit';
-import { useParams } from 'react-router-dom';
+import { useParams,Link } from 'react-router-dom';
 import Axios from 'axios';
 import {useFormik} from 'formik';
 import './stylesheet/FindUser.css'
@@ -28,6 +28,9 @@ const Finduser=()=>
             newName:newName,
             newPassword:
             newPassword
+        }).then((res)=>
+        {
+            window.alert('User has been modified.')
         })
     }
     return <div className='modify-section'>
@@ -47,7 +50,9 @@ const Finduser=()=>
             <MDBInput id='form1' type='text' className='w-25 m-3 text-center' value={userData.isModerators} />
             <div className='button-modity'>
             <Button className='m-2' onClick={()=>updateData(userData._id)}>Modify</Button>
+            <Link to='/'>
             <Button >Back</Button>
+            </Link>
             </div>
             </form>
          </div>
