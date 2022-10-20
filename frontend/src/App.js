@@ -12,8 +12,8 @@ import SEPractice from "./Pages/SE-Practice";
 import Moderator from './Pages/Moderator';
 import Upload from './Pages/Upload'
 import ApproveArticle from './Pages/ApproveArticle';
+import { useState } from 'react';
 
-const storeData=JSON.parse(localStorage.getItem('token'));
 const Logout=()=>
 {
   window.localStorage.removeItem('token');
@@ -27,6 +27,7 @@ function App() {
   );
 }
 const Navbars=()=>{
+  const storeData=JSON.parse(localStorage.getItem('token'));
   return (
     <Router>
         <Navbar bg="dark" expand="lg" variant="dark">

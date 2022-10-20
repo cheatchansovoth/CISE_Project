@@ -81,8 +81,10 @@ const User= mongoose.model('Usertbl');
   var mailOptions = {
     from: 'cheatchansovoth@gmail.com',
     to: `${userEmail}`,
-    subject: 'Sending Email using Node.js',
-    text: `${link}`
+    subject: 'Reset Password',
+    html:`<h1>Your token is here do not share it</h1> <br/>
+      ${link}
+    `
   };
   transporter.sendMail(mailOptions, function(error, info){
     if (error) {
@@ -124,7 +126,6 @@ app.post('/reset-password',async(req,res)=>
     const token=jwt.sign(payload,secret,{expiresIn:'15m'})
 
     const link=`http://128.199.126.239:5000/resetpassword/newpassword/${oldUser._id}`;
-    console.log(link);
     res.status(200).json({result:link});
     sendEmail(link,oldUser.email);
   }

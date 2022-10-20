@@ -53,8 +53,8 @@ const UserTable=()=>
                     <td>{val.name}</td>
                     <td>{val.email}</td>
                     <td>{val.password}</td>
-                    <td>{val.isAdmin}</td>
                     <td>{val.isModerators}</td>
+                    <td>{val.isAdmin}</td>
                     <td>
                         <Link to={`finduser/${val._id}`}>
                         <Button variant="primary" className='m-1'>Edit</Button>

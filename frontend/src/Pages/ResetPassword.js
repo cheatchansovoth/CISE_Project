@@ -12,6 +12,7 @@ const ResetPassword=()=>
 
 {
     const [getToken,setGetToken]=useState("");
+    const [success,setSuccess]=useState("");
     const Formik=useFormik({
         initialValues:{
             email:'',
@@ -21,7 +22,8 @@ const ResetPassword=()=>
                 email:values.email,
             }).then((res)=>
             {
-                window.localStorage.setItem('token',JSON.stringify(res.data));
+                window.localStorage.setItem('resettoken',JSON.stringify(res.data));
+                setSuccess('Please check your email')
                 setGetToken(res.data);
             })
         }
@@ -35,8 +37,8 @@ const ResetPassword=()=>
                 <MDBInput placeholder='Email' className='w-50 submit-field mt-5' type='email' name='email' value={Formik.values.email} onChange={Formik.handleChange}></MDBInput>
                 </Col>
                 <Col lg={12}>
-                {/* {error?<p className='error-class'>{error}</p>:null}
-                {success?<p className='success-class'>{success}</p>:null} */}
+                {/* {error?<p className='error-class'>{error}</p>:null} */}
+                {success?<p className='success-class'>{success}</p>:null}
                 </Col>
                 <Col lg={12}>
                 <MDBBtn type='submit' className='submit-btn mt-5' >Submit</MDBBtn>
