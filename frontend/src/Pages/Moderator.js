@@ -12,19 +12,21 @@ const Moderator=()=>
     {
       window.location.href='/login'
     }
-    useEffect(()=>
-    {
-                Axios.get("http://localhost:5000/mod/pendinglist").then((response)=>
-                {
-                    setPendingList(response.data);
-                })
-    },[])
-    const updateData=(id)=>
-    {
-            Axios.put(`http://localhost:5000/updateUser/`,{
-            values:id,
-        })
-    }
+      useEffect(()=>
+      {
+        if(storeData.isAdmin=='true' || storeData.isModerators=='true')
+        {
+                  Axios.get("http://localhost:5000/mod/pendinglist").then((response)=>
+                  {
+                      setPendingList(response.data);
+                  })
+        }
+        else 
+        {
+          window.location.href='/login'
+        }
+      },[])
+
     return (<div>
         <MDBTable>
       <MDBTableHead>

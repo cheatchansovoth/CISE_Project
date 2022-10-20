@@ -37,6 +37,7 @@ const Login=()=>
                   if(response.data.isAdmin==='false')
                   {
                     window.localStorage.setItem('token',JSON.stringify(response.data));
+                    window.location.href='/upload';
                   }
                   else 
                   {

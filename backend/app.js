@@ -54,7 +54,7 @@ const User= mongoose.model('Usertbl');
               }
               const token=jwt.sign(payload,secret,{expiresIn:'15m'})
 
-              return res.status(200).json({user:token,isAdmin:user.isAdmin,isLogging:'true'});
+              return res.status(200).json({user:token,isAdmin:user.isAdmin,isModerators:user.isModerators,isLogging:'true'});
           }
           else 
           {
@@ -93,7 +93,7 @@ const User= mongoose.model('Usertbl');
     }
 })
 }
-app.get('/finduser/:id',async (req,res)=>
+app.get('/admin/finduser/:id',async (req,res)=>
 {
   const id=req.params.id;
   User.findById(id, function (err, result) {
@@ -144,7 +144,7 @@ app.get('/reset-password/:id/:token',async (req,res)=>
   
 })
 })
-app.put('/updateUser',async(req,res)=>
+app.put('/admin/updateUser',async(req,res)=>
 {
   const newName=req.body.newName;
   const newPassword=req.body.newPassword;
@@ -163,7 +163,7 @@ app.put('/updateUser',async(req,res)=>
     res.send(err)
   }
 })
-app.get('/userinformation', async (req,res)=>
+app.get('/admin/userinformation', async (req,res)=>
 {
   User.find({},(err,result)=>
   {
@@ -178,14 +178,14 @@ app.get('/userinformation', async (req,res)=>
   })
 })
 
-app.delete('/deleteuser/:id',async(req,res)=>
+app.delete('/admin/deleteuser/:id',async(req,res)=>
 {
   const id=req.params.id;
   
   await User.findByIdAndRemove(id).exec();
   res.send('deleted');
 })
-app.get('/bookdetails/:id',async (req,res)=>
+app.get('/mod/bookdetails/:id',async (req,res)=>
 {
   const id=req.params.id;
   BookDetails.findById(id, function (err, result) {
@@ -197,14 +197,14 @@ app.get('/bookdetails/:id',async (req,res)=>
     }
 })
 })
-app.delete('/deleteBook/:id',async(req,res)=>
+app.delete('/mod/deleteBook/:id',async(req,res)=>
 {
   const id=req.params.id;
   
   await BookDetails.findByIdAndRemove(id).exec();
   res.send('deleted');
 })
-app.put('/updateStatus',async(req,res)=>
+app.put('/mod/updateStatus',async(req,res)=>
 {
   const id=req.body.id;
 
@@ -286,7 +286,7 @@ app.post('/post-article',async(req,res)=>
 require('./model/RemoveArticle');
 const RemoveArticle= mongoose.model('RemoveArticle');
 
-app.post('/removearticle',async(req,res)=>
+app.post('/mod/removearticle',async(req,res)=>
 {
   const title=req.body.title
   const authors=req.body.authors
