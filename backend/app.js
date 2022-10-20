@@ -4,6 +4,7 @@ const mongoose= require('mongoose');
 
 const jwt=require('jsonwebtoken');
 const nodemailer = require("nodemailer");
+const { response } = require('express');
 
 const app=express();
 app.use(express.json());
@@ -34,7 +35,6 @@ const User= mongoose.model('Usertbl');
     }
     catch(err)
     {
-      console.log(err);
       res.send({status:"error"});
     }
   });
@@ -76,7 +76,6 @@ app.get('/finduser/:id',async (req,res)=>
       res.json({message:'not find user'});
     }
     else{
-      console.log('find user');
       res.send({User:result});
     }
 })
@@ -101,7 +100,6 @@ app.post('/reset-password',async(req,res)=>
     const token=jwt.sign(payload,secret,{expiresIn:'15m'})
 
     const link=`http://localhost:3000/resetpassword/newpassword/${oldUser._id}`;
-    console.log(link);
     res.status(200).json({result:link});
   }
 })
@@ -169,7 +167,6 @@ app.get('/bookdetails/:id',async (req,res)=>
       res.json({message:'not find book'});
     }
     else{
-      console.log('find book');
       res.send({BookDetails:result});
     }
 })
@@ -191,7 +188,6 @@ app.put('/updateStatus',async(req,res)=>
       updateInfo.pending='false';
       updateInfo.save();
       res.send(updateInfo);
-      console.log(updateInfo.status)
     })
   }catch(err)
   {
@@ -202,7 +198,6 @@ require('./BookDetails');
 const BookDetails=mongoose.model('BookDetails');
 app.get("/BookDetailsFind",async(req,res) =>{
   const q = req.query.q;
-  console.log(q);
   const keys=['title','authors']
 let data = await BookDetails.find(
   {'pending': {$ne : "true"},
@@ -259,10 +254,33 @@ app.post('/post-article',async(req,res)=>
     }
     catch(err)
     {
-      console.log(err);
       res.send({status:"error"});
     }
   });
+require('./RemoveArticle');
+const RemoveArticle= mongoose.model('RemoveArticle');
+
+app.post('/removearticle',async(req,res)=>
+{
+  const title=req.body.title
+  const authors=req.body.authors
+  const source=req.body.source
+  const pubyear=req.body.pubyear
+  const doi=req.body.doi
+  const claim=req.body.claim
+  const evidence=req.body.evidence  
+  const remove= new RemoveArticle({title:title,authors:authors,source:source,pubyear:pubyear,doi:doi,claim:claim,evidence:evidence});
+  try
+  {
+    await remove.save();
+    res.send({status:"ok"});
+  }
+  catch(err)
+  {
+    res.send({status:"error"});
+  }
+})
+
 app.get('/',(req,res,next)=>
 {
     res.send(`Port is running at ${port}`);

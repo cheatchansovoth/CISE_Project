@@ -23,6 +23,15 @@ const ApproveArticle=()=>
     }
     const Delete=(id)=>
     {
+        Axios.post(`http://localhost:5000/removearticle`,{
+             title:userData.title,
+             authors:userData.authors,
+             source:userData.source,
+             pubyear:userData.pubyear,
+             doi:userData.doi,
+             claim:userData.claim,
+             evidence:userData.evidence, 
+        })
         Axios.delete(`http://localhost:5000/deleteBook/${id}`);
     }
     return (<div>
