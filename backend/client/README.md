@@ -10,5 +10,5 @@ email:cheryl.ul@aut.ac.nz
 password:M4fkbschjMs3bKQ
 
 User:
-email:cheryl.ul@aut.ac.nz
+email:danish.sim@aut.ac.nz
 password:M4fkbschjMs3bKQ
