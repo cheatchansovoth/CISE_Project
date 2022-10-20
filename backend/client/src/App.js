@@ -37,6 +37,7 @@ const Navbars=()=>{
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="text-center">
                 <Nav.Link as={Link} to="/login">{storeData? <a onClick={Logout}>Logout</a>: <a>Login</a>}</Nav.Link>
+                <Nav.Link as={Link} to="/register">Register</Nav.Link>
               </Nav>
             </Navbar.Collapse>
           </Container>
